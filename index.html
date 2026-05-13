@@ -3,16 +3,16 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Uday Kumar | Portfolio</title>
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- GSAP -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
     <!-- Remix Icons -->
     <link
@@ -40,6 +40,7 @@
         html{
             scroll-behavior:smooth;
         }
+        
 
         body{
             background:#050505;
@@ -54,52 +55,71 @@
 
         /* BACKGROUND */
 
+        .bg-grid{
+            position:fixed;
+            inset:0;
+            background-image:
+            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+            background-size:50px 50px;
+            z-index:-3;
+        }
+
         .bg-blur{
             position:fixed;
             inset:0;
-            z-index:-1;
             overflow:hidden;
+            z-index:-2;
         }
 
         .orb{
             position:absolute;
             border-radius:999px;
             filter:blur(120px);
-            opacity:0.18;
+            opacity:0.25;
         }
 
         .orb1{
-            width:350px;
-            height:350px;
+            width:400px;
+            height:400px;
             background:#2563eb;
-            top:-100px;
-            left:-100px;
+            top:-120px;
+            left:-120px;
         }
 
         .orb2{
-            width:350px;
-            height:350px;
-            background:#7c3aed;
-            bottom:-100px;
-            right:-100px;
+            width:400px;
+            height:400px;
+            background:#9333ea;
+            bottom:-120px;
+            right:-120px;
+        }
+
+        .orb3{
+            width:300px;
+            height:300px;
+            background:#06b6d4;
+            top:40%;
+            left:40%;
         }
 
         /* NAVBAR */
 
-        nav{
-            backdrop-filter:blur(16px);
-            background:rgba(0,0,0,0.35);
+        .glass{
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.08);
+            backdrop-filter:blur(18px);
         }
 
         /* HERO */
 
         .hero-name{
-            font-size:clamp(2rem,6vw,4.2rem);
+            font-size:clamp(1.5rem,5vw,3.5rem);
             line-height:1;
             display:flex;
             flex-wrap:wrap;
             gap:0.08em;
-            color:white;
         }
 
         .char{
@@ -107,64 +127,112 @@
             opacity:0;
 
             transform:
-                translateY(60px)
-                rotateX(-90deg);
+            translateY(60px)
+            rotateX(-90deg);
 
-            filter:blur(6px);
+            filter:blur(8px);
         }
 
         .hero-sub{
             opacity:0;
-            transform:translateY(20px);
-        }
-
-        /* GLASS */
-
-        .glass{
-            background:rgba(255,255,255,0.05);
-            border:1px solid rgba(255,255,255,0.08);
-            backdrop-filter:blur(12px);
-        }
-
-        /* PROFILE IMAGE */
-
-        .profile-img{
-            width:220px;
-            height:220px;
-            object-fit:cover;
-            border-radius:999px;
-
-            border:4px solid rgba(59,130,246,0.4);
-
-            box-shadow:
-                0 0 40px rgba(59,130,246,0.35);
-
-            transition:0.4s ease;
-        }
-
-        .profile-img:hover{
-            transform:scale(1.05);
-        }
-
-        /* CARD */
-
-        .card{
-            background:#0d0d0d;
-            border:1px solid rgba(255,255,255,0.08);
-
-            transition:0.3s ease;
-
-            opacity:0;
             transform:translateY(30px);
         }
 
-        .card:hover{
-            transform:translateY(-6px);
-            border-color:#3b82f6;
-            background:#111111;
+        /* PROFILE */
+
+        .profile-wrapper{
+            position:relative;
+            perspective:1000px;
         }
 
-        /* SECTION TITLE */
+        .profile-ring{
+            position:absolute;
+            inset:-20px;
+            border-radius:999px;
+            border:2px solid rgba(59,130,246,0.3);
+            animation:spin 12s linear infinite;
+        }
+
+        .profile-ring2{
+            position:absolute;
+            inset:-35px;
+            border-radius:999px;
+            border:2px dashed rgba(168,85,247,0.35);
+            animation:spinReverse 15s linear infinite;
+        }
+
+        .profile-img{
+            width:320px;
+            height:320px;
+            object-fit:cover;
+            border-radius:999px;
+            position:relative;
+            z-index:5;
+
+            border:5px solid rgba(255,255,255,0.1);
+
+            box-shadow:
+            0 0 60px rgba(59,130,246,0.4),
+            0 0 120px rgba(168,85,247,0.25);
+
+            transition:0.5s ease;
+        }
+
+        .profile-img:hover{
+            transform:
+            rotateY(8deg)
+            scale(1.04);
+        }
+
+        @keyframes spin{
+
+            from{
+                transform:rotate(0deg);
+            }
+
+            to{
+                transform:rotate(360deg);
+            }
+
+        }
+
+        @keyframes spinReverse{
+
+            from{
+                transform:rotate(360deg);
+            }
+
+            to{
+                transform:rotate(0deg);
+            }
+
+        }
+
+        /* CARDS */
+
+        .card{
+            background:rgba(15,15,15,0.8);
+            border:1px solid rgba(255,255,255,0.08);
+            backdrop-filter:blur(14px);
+
+            transition:0.4s ease;
+
+            opacity:0;
+            transform:translateY(40px);
+        }
+
+        .card:hover{
+            transform:
+            translateY(-10px)
+            rotateX(3deg);
+
+            border-color:#3b82f6;
+
+            box-shadow:
+            0 20px 50px rgba(59,130,246,0.18);
+        }
+
+        /* TITLES */
 
         .section-title{
             position:relative;
@@ -174,9 +242,8 @@
         .section-title::after{
             content:"";
             position:absolute;
-
             left:0;
-            bottom:-10px;
+            bottom:-12px;
 
             width:70%;
             height:4px;
@@ -190,28 +257,80 @@
             );
         }
 
-        /* CONTACT */
+        /* FLOAT */
 
-        .contact-link{
-            transition:0.3s ease;
+        .floating{
+            animation:floating 4s ease-in-out infinite;
         }
 
-        .contact-link:hover{
-            transform:translateX(5px);
-            color:#60a5fa;
+        @keyframes floating{
+
+            0%{
+                transform:translateY(0px);
+            }
+
+            50%{
+                transform:translateY(-12px);
+            }
+
+            100%{
+                transform:translateY(0px);
+            }
+
         }
+        /* DISTORTED BORDER EFFECT */
+.border-anim{
+    position:absolute;
+    inset:0;
+    border-radius:999px;
+    padding:2px;
+    background:linear-gradient(120deg,#3b82f6,#9333ea,#06b6d4,#3b82f6);
+    background-size:300% 300%;
+    animation:moveBorder 4s linear infinite;
+    filter:blur(0.5px);
+}
+.reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition:all 0.8s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+.magnetic{
+    position:relative;
+    display:inline-block;
+    transition:transform 0.2s ease;
+    will-change: transform;
+}
+
+.border-anim::after{
+    content:"";
+    position:absolute;
+    inset:2px;
+    border-radius:999px;
+    background:#050505;
+}
+
+@keyframes moveBorder{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 
         /* MOBILE */
 
         @media(max-width:768px){
 
-            .hero-name{
-                font-size:2.7rem;
+            .profile-img{
+                width:220px;
+                height:220px;
             }
 
-            .profile-img{
-                width:180px;
-                height:180px;
+            .hero-name{
+                font-size:2.5rem;
             }
 
         }
@@ -228,57 +347,124 @@
         }
 
         ::-webkit-scrollbar-track{
-            background:#080808;
+            background:#050505;
         }
+        /* PLASMA EDGE EFFECT CARD */
+.plasma-card{
+    position:relative;
+    padding:60px 30px;
+    border-radius:30px;
+    background:rgba(10,10,10,0.9);
+    overflow:hidden;
+    text-align:center;
+    z-index:1;
+}
+
+/* glowing plasma border */
+.plasma-card::before{
+    content:"";
+    position:absolute;
+    inset:-3px;
+    border-radius:32px;
+    background:linear-gradient(
+        90deg,
+        #3b82f6,
+        #06b6d4,
+        #9333ea,
+        #3b82f6
+    );
+    background-size:300% 300%;
+    animation:plasmaMove 5s linear infinite;
+    z-index:-2;
+    filter:blur(6px);
+}
+
+/* inner cut layer */
+.plasma-card::after{
+    content:"";
+    position:absolute;
+    inset:3px;
+    border-radius:27px;
+    background:#050505;
+    z-index:-1;
+}
+
+/* animation */
+@keyframes plasmaMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 
     </style>
-
 </head>
-
 <body>
 
     <!-- BACKGROUND -->
+
+    <div class="bg-grid"></div>
 
     <div class="bg-blur">
 
         <div class="orb orb1"></div>
         <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
 
     </div>
 
     <!-- NAVBAR -->
 
-    <nav class="fixed top-0 left-0 w-full z-50 border-b border-white/5">
+    <nav class="fixed top-0 left-0 w-full z-50 px-4 py-4">
 
-        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto">
 
-            <div class="flex items-center gap-3">
+            <div class="glass rounded-3xl px-6 py-5 flex items-center justify-between">
 
-                <i class="ri-code-box-fill text-2xl text-blue-500"></i>
+                <!-- LEFT -->
 
-                <span class="unbounded text-sm uppercase font-black">
+                <h1 class="unbounded text-white text-lg md:text-2xl font-black">
 
-                    Portfolio
+                    Uday Kumar
 
-                </span>
+                </h1>
+
+                <!-- MENU -->
+
+                <button
+                    id="menu-btn"
+                    class="text-3xl text-white"
+                >
+
+                    <i class="ri-menu-4-line"></i>
+
+                </button>
 
             </div>
 
-            <div class="flex gap-5 text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
+            <!-- DROPDOWN -->
 
-                <a href="#skills" class="hover:text-blue-500 transition">
+            <div
+                id="mobile-menu"
+                class="hidden mt-4 glass rounded-3xl p-6 flex flex-col gap-5 uppercase tracking-[0.2em] text-sm text-zinc-300 font-semibold"
+            >
+
+                <a href="#skills" class="hover:text-blue-400 transition">
                     Skills
                 </a>
 
-                <a href="#education" class="hover:text-blue-500 transition">
+                <a href="#creative" class="hover:text-blue-400 transition">
+                    Creative Studio
+                </a>
+
+                <a href="#education" class="hover:text-blue-400 transition">
                     Education
                 </a>
 
-                <a href="#projects" class="hover:text-blue-500 transition">
+                <a href="#projects" class="hover:text-blue-400 transition">
                     Projects
                 </a>
 
-                <a href="#contact" class="hover:text-blue-500 transition">
+                <a href="#contact" class="hover:text-blue-400 transition">
                     Contact
                 </a>
 
@@ -290,37 +476,42 @@
 
     <!-- HERO -->
 
-    <section class="min-h-screen flex items-center px-6 md:px-20 pt-28">
+    <section class="min-h-screen flex items-center px-6 md:px-20 pt-32">
 
         <div class="max-w-7xl mx-auto w-full">
 
-            <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-                <!-- IMAGE -->
+                <!-- LEFT IMAGE -->
 
-                <div class="hero-sub relative">
+                <div class="hero-sub flex justify-center">
 
-                    <div class="absolute inset-0 bg-blue-500/30 blur-[80px] rounded-full"></div>
+                    <div class="profile-wrapper floating">
 
-                    <!-- SAVE YOUR IMAGE AS myphoto.png -->
+                        <div class="profile-ring"></div>
+                        <div class="profile-ring2"></div>
 
-                    <img
-                        src="2101d92c-7c19-4485-8a4e-03ecf2ca2d6b.png"
-                        alt="Uday Kumar"
-                        class="profile-img relative z-10"
-                    >
+                        <!-- SAVE IMAGE AS profile.png -->
+
+                        <img
+                            src="c:\Users\UDAY KUMAR\Downloads\profile.png.png"
+                            alt="Uday Kumar"
+                            class="profile-img"
+                        >
+
+                    </div>
 
                 </div>
 
-                <!-- TEXT -->
+                <!-- RIGHT CONTENT -->
 
                 <div>
 
                     <div class="hero-sub mb-6">
 
-                        <span class="glass px-5 py-2 rounded-full inline-flex items-center gap-2 text-[10px] md:text-xs uppercase tracking-[0.25em] text-blue-400 font-bold">
+                        <span class="glass px-5 py-3 rounded-full inline-flex items-center gap-3 text-[10px] md:text-xs uppercase tracking-[0.25em] text-cyan-300 font-bold">
 
-                            <i class="ri-code-s-slash-fill"></i>
+                            <i class="ri-flashlight-fill"></i>
 
                             Frontend Developer & Creative Editor
 
@@ -330,39 +521,27 @@
 
                     <!-- NAME -->
 
-                    <h1 id="hero-name" class="hero-name unbounded font-black uppercase mb-6">
+                    <h1
+                        id="hero-name"
+                        class="hero-name unbounded font-black uppercase mb-8"
+                    >
 
                         Uday Kumar
 
                     </h1>
 
-                    <!-- AGE -->
+                    <!-- DESCRIPTION -->
 
                     <div class="hero-sub mb-8">
 
-                        <div class="inline-flex items-center gap-3 glass px-5 py-3 rounded-full">
+                        <p class="text-zinc-400 text-base md:text-lg leading-relaxed max-w-2xl">
 
-                            <i class="ri-user-3-fill text-blue-500"></i>
-
-                            <span class="text-sm uppercase tracking-[0.2em] text-zinc-300 font-semibold">
-
-                                19 Years Old
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <!-- DESCRIPTION -->
-
-                    <div class="hero-sub mb-10">
-
-                        <p class="text-zinc-400 text-sm md:text-lg leading-relaxed max-w-2xl">
-
-                            Python Developer, Frontend Designer,
-                            Video Editor, and Creative Digital Creator
-                            building smooth modern web experiences.
+                            Creative frontend developer,
+                            Python programmer,
+                            video editor,
+                            and digital creator building
+                            premium modern web experiences
+                            with smooth animations and futuristic UI.
 
                         </p>
 
@@ -374,16 +553,20 @@
 
                         <a
                             href="#projects"
-                            class="px-7 py-4 rounded-full bg-blue-600 hover:bg-blue-500 transition font-semibold text-sm"
+                            class="px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-500 transition font-semibold"
                         >
+
                             View Projects
+
                         </a>
 
                         <a
                             href="#contact"
-                            class="px-7 py-4 rounded-full border border-white/10 hover:border-blue-500 hover:bg-blue-500/10 transition font-semibold text-sm"
+                            class="px-8 py-4 rounded-full border border-white/10 hover:border-cyan-400 hover:bg-cyan-400/10 transition font-semibold"
                         >
+
                             Contact Me
+
                         </a>
 
                     </div>
@@ -406,86 +589,186 @@
 
         </h2>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-14">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <!-- TECH -->
+            <!-- PYTHON -->
 
-            <div>
+            <div class="card rounded-[2rem] p-8">
 
-                <h3 class="unbounded text-sm uppercase tracking-[0.3em] text-blue-400 mb-8">
+                <img
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                    class="w-16 h-16 mb-6"
+                >
 
-                    Technical Stack
+                <h3 class="text-3xl font-bold mb-3">
+
+                    Python
 
                 </h3>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <p class="text-zinc-400 leading-7">
 
-                    <div class="card rounded-3xl p-6 flex items-center gap-4">
+                    Backend development,
+                    automation,
+                    APIs,
+                    and modern application building.
+
+                </p>
+
+            </div>
+
+            <!-- HTML -->
+
+            <div class="card rounded-[2rem] p-8">
+
+                <i class="ri-html5-fill text-6xl text-orange-500 mb-6"></i>
+
+                <h3 class="text-3xl font-bold mb-3">
+
+                    HTML & CSS
+
+                </h3>
+
+                <p class="text-zinc-400 leading-7">
+
+                    Modern responsive layouts,
+                    glassmorphism,
+                    and premium portfolio UI.
+
+                </p>
+
+            </div>
+
+            <!-- JS -->
+             <script>
+document.querySelectorAll(".magnetic").forEach(btn => {
+
+    btn.addEventListener("mousemove", (e) => {
+        const rect = btn.getBoundingClientRect();
+
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    });
+
+    btn.addEventListener("mouseleave", () => {
+        btn.style.transform = "translate(0,0)";
+    });
+
+});
+</script>
+
+            <div class="card rounded-[2rem] p-8">
+
+                <i class="ri-javascript-fill text-6xl text-yellow-300 mb-6"></i>
+
+                <h3 class="text-3xl font-bold mb-3">
+
+                    JavaScript
+
+                </h3>
+
+                <p class="text-zinc-400 leading-7">
+
+                    Smooth interactions,
+                    animations,
+                    and dynamic frontend experiences.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CREATIVE -->
+
+    <section id="creative" class="px-6 md:px-20 py-24">
+
+        <h2 class="section-title unbounded text-3xl md:text-5xl uppercase mb-16">
+
+            Creative Studio
+
+        </h2>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+
+            <!-- VIDEO -->
+
+            <div class="card rounded-[2rem] p-8">
+
+                <div class="flex items-center gap-5 mb-10">
+
+                    <i class="ri-movie-2-fill text-6xl text-purple-400"></i>
+
+                    <div>
+
+                        <h3 class="text-3xl font-bold">
+
+                            Video Editing
+
+                        </h3>
+
+                        <p class="text-zinc-500">
+
+                            Professional Editing Tools
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="space-y-5">
+
+                    <div class="glass rounded-2xl p-5 flex items-center gap-5">
 
                         <img
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                            class="w-12 h-12"
-                            alt="Python"
+                            src="https://upload.wikimedia.org/wikipedia/commons/9/90/DaVinci_Resolve_17_logo.svg"
+                            class="w-14 h-14"
                         >
 
                         <div>
-                            <h4 class="font-bold text-lg">Python</h4>
-                            <p class="text-zinc-500 text-sm">Backend & Logic</p>
+
+                            <h4 class="font-bold text-xl">
+
+                                DaVinci Resolve
+
+                            </h4>
+
+                            <p class="text-zinc-500 text-sm">
+
+                                Color Grading & Cinematic Editing
+
+                            </p>
+
                         </div>
 
                     </div>
 
-                    <div class="card rounded-3xl p-6 flex items-center gap-4">
+                    <div class="glass rounded-2xl p-5 flex items-center gap-5">
 
-                        <i class="ri-html5-fill text-4xl text-orange-500"></i>
-
-                        <div>
-                            <h4 class="font-bold text-lg">HTML5</h4>
-                            <p class="text-zinc-500 text-sm">Modern Structure</p>
-                        </div>
-
-                    </div>
-
-                    <div class="card rounded-3xl p-6 flex items-center gap-4">
-
-                        <i class="ri-css3-fill text-4xl text-blue-400"></i>
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg"
+                            class="w-14 h-14"
+                        >
 
                         <div>
-                            <h4 class="font-bold text-lg">CSS3</h4>
-                            <p class="text-zinc-500 text-sm">Responsive Styling</p>
-                        </div>
 
-                    </div>
+                            <h4 class="font-bold text-xl">
 
-                    <div class="card rounded-3xl p-6 flex items-center gap-4">
+                                Premiere Pro
 
-                        <i class="ri-javascript-fill text-4xl text-yellow-400"></i>
+                            </h4>
 
-                        <div>
-                            <h4 class="font-bold text-lg">JavaScript</h4>
-                            <p class="text-zinc-500 text-sm">Interactive UI</p>
-                        </div>
+                            <p class="text-zinc-500 text-sm">
 
-                    </div>
+                                Professional Video Production
 
-                    <div class="card rounded-3xl p-6 flex items-center gap-4">
+                            </p>
 
-                        <i class="ri-terminal-window-fill text-4xl text-green-400"></i>
-
-                        <div>
-                            <h4 class="font-bold text-lg">Streamlit</h4>
-                            <p class="text-zinc-500 text-sm">Python Apps</p>
-                        </div>
-
-                    </div>
-
-                    <div class="card rounded-3xl p-6 flex items-center gap-4">
-
-                        <i class="ri-database-2-fill text-4xl text-cyan-400"></i>
-
-                        <div>
-                            <h4 class="font-bold text-lg">MySQL</h4>
-                            <p class="text-zinc-500 text-sm">Database Systems</p>
                         </div>
 
                     </div>
@@ -494,113 +777,52 @@
 
             </div>
 
-            <!-- CREATIVE -->
+            <!-- PHOTO -->
 
-            <div>
+            <div class="card rounded-[2rem] p-8">
 
-                <h3 class="unbounded text-sm uppercase tracking-[0.3em] text-purple-400 mb-8">
+                <div class="flex items-center gap-5 mb-10">
 
-                    Creative Studio
+                    <i class="ri-image-edit-fill text-6xl text-pink-400"></i>
 
-                </h3>
+                    <div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <h3 class="text-3xl font-bold">
 
-                    <!-- VIDEO -->
+                            Photo Editing
 
-                    <div class="card rounded-3xl p-6">
+                        </h3>
 
-                        <div class="flex items-center gap-4 mb-6">
+                        <p class="text-zinc-500">
 
-                            <i class="ri-movie-2-fill text-4xl text-purple-400"></i>
+                            Creative Design Tools
 
-                            <div>
-
-                                <h4 class="font-bold text-lg">
-                                    Video Editing
-                                </h4>
-
-                                <p class="text-zinc-500 text-sm">
-                                    Professional Tools
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <div class="space-y-4">
-
-                            <div class="flex items-center gap-4">
-
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/9/90/DaVinci_Resolve_17_logo.svg"
-                                    class="w-8 h-8"
-                                    alt="DaVinci"
-                                >
-
-                                <span class="font-medium">
-                                    DaVinci Resolve
-                                </span>
-
-                            </div>
-
-                            <div class="flex items-center gap-4">
-
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg"
-                                    class="w-8 h-8"
-                                    alt="Premiere"
-                                >
-
-                                <span class="font-medium">
-                                    Adobe Premiere Pro
-                                </span>
-
-                            </div>
-
-                        </div>
+                        </p>
 
                     </div>
 
-                    <!-- PHOTO -->
+                </div>
 
-                    <div class="card rounded-3xl p-6">
+                <div class="glass rounded-2xl p-5 flex items-center gap-5">
 
-                        <div class="flex items-center gap-4 mb-6">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg"
+                        class="w-14 h-14"
+                    >
 
-                            <i class="ri-image-edit-fill text-4xl text-pink-400"></i>
+                    <div>
 
-                            <div>
+                        <h4 class="font-bold text-xl">
 
-                                <h4 class="font-bold text-lg">
-                                    Photo Editing
-                                </h4>
+                            Adobe Photoshop
 
-                                <p class="text-zinc-500 text-sm">
-                                    Creative Design
-                                </p>
+                        </h4>
 
-                            </div>
+                        <p class="text-zinc-500 text-sm">
 
-                        </div>
+                            Photo Manipulation & Creative Design
 
-                        <div class="space-y-4">
-
-                            <div class="flex items-center gap-4">
-
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg"
-                                    class="w-8 h-8"
-                                    alt="Photoshop"
-                                >
-
-                                <span class="font-medium">
-                                    Adobe Photoshop
-                                </span>
-
-                            </div>
-
-                        </div>
+                        </p>
 
                     </div>
 
@@ -624,7 +846,7 @@
 
         <div class="card rounded-[2rem] p-10">
 
-            <div class="flex items-center gap-5">
+            <div class="flex items-start gap-5">
 
                 <div class="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
 
@@ -634,21 +856,15 @@
 
                 <div>
 
-                    <h3 class="text-2xl font-bold mb-2">
+                    <h3 class="text-2xl font-bold mb-3">
 
-                        B.Tech Computer Science & Engineering
+                        3rd Year Computer Science & Engineering Student
 
                     </h3>
 
-                    <p class="text-zinc-400">
+                    <p class="text-zinc-400 text-lg">
 
                         JNTUH University College of Engineering Manthani
-
-                    </p>
-
-                    <p class="text-zinc-500 text-sm mt-2">
-
-                        Manthani, Telangana
 
                     </p>
 
@@ -670,37 +886,23 @@
 
         </h2>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid md:grid-cols-2 gap-8">
 
-            <!-- PROJECT 1 -->
+            <!-- PROJECT -->
 
             <div class="card rounded-[2rem] p-8">
 
-                <div class="flex items-center gap-4 mb-6">
+                <i class="ri-heart-pulse-fill text-6xl text-blue-400 mb-6"></i>
 
-                    <div class="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center">
+                <h3 class="text-3xl font-bold mb-4">
 
-                        <i class="ri-heart-pulse-fill text-3xl text-blue-400"></i>
+                    Diet Recommendation App
 
-                    </div>
-
-                    <div>
-
-                        <h3 class="text-2xl font-bold">
-                            Diet Recommendation App
-                        </h3>
-
-                        <p class="text-zinc-500 text-sm uppercase tracking-[0.2em]">
-                            Streamlit • Python
-                        </p>
-
-                    </div>
-
-                </div>
+                </h3>
 
                 <p class="text-zinc-400 leading-7 mb-8">
 
-                    AI-powered diet recommendation application
+                    AI powered diet recommendation system
                     built using Python and Streamlit.
 
                 </p>
@@ -708,52 +910,42 @@
                 <a
                     href="https://diet-recommendation-2026.streamlit.app/"
                     target="_blank"
-                    class="inline-block px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-500 transition text-sm font-semibold"
+                    class="inline-block px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-500 transition"
                 >
+
                     Live Project
+
                 </a>
 
             </div>
 
-            <!-- PROJECT 2 -->
+            <!-- PROJECT -->
 
             <div class="card rounded-[2rem] p-8">
 
-                <div class="flex items-center gap-4 mb-6">
+                <i class="ri-code-box-fill text-6xl text-purple-400 mb-6"></i>
 
-                    <div class="w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center">
+                <h3 class="text-3xl font-bold mb-4">
 
-                        <i class="ri-code-s-slash-fill text-3xl text-purple-400"></i>
+                    Avinya 2K27 Website
 
-                    </div>
-
-                    <div>
-
-                        <h3 class="text-2xl font-bold">
-                            Avinya 2K27 Website
-                        </h3>
-
-                        <p class="text-zinc-500 text-sm uppercase tracking-[0.2em]">
-                            Frontend • Vercel
-                        </p>
-
-                    </div>
-
-                </div>
+                </h3>
 
                 <p class="text-zinc-400 leading-7 mb-8">
 
-                    Modern responsive frontend event website
-                    with smooth UI and animations.
+                    Modern responsive event website
+                    with futuristic UI and smooth animations.
 
                 </p>
 
                 <a
                     href="https://avinya2k27jntuhucem.vercel.app/"
                     target="_blank"
-                    class="inline-block px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-500 transition text-sm font-semibold"
+                    class="inline-block px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-500 transition"
                 >
+
                     Live Project
+
                 </a>
 
             </div>
@@ -766,78 +958,78 @@
 
     <footer
         id="contact"
-        class="px-6 md:px-20 py-24 border-t border-white/5 bg-black/30"
+        class="px-6 md:px-20 py-24 border-t border-white/5"
     >
 
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-14">
+        <div class="max-w-7xl mx-auto">
 
-            <div>
+            <h2 class="unbounded text-4xl md:text-6xl uppercase leading-tight mb-10">
 
-                <div class="flex items-start gap-5 mb-6">
+                Let's Build <br>
+                Something Modern
 
-                    <div class="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+            </h2>
 
-                        <i class="ri-sparkling-2-fill text-3xl text-blue-400"></i>
-
-                    </div>
-
-                    <h2 class="unbounded text-4xl md:text-6xl leading-tight uppercase">
-
-                        Let's Create <br>
-                        Something Modern.
-
-                    </h2>
-
-                </div>
-
-                <p class="text-zinc-500 max-w-lg leading-8">
-
-                    Available for frontend projects,
-                    creative editing, and collaborations.
-
-                </p>
-
-            </div>
-
-            <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-6 text-lg">
 
                 <a
                     href="mailto:uday36863@gmail.com"
-                    class="contact-link flex items-center gap-4"
+                    class="hover:text-blue-400 transition"
                 >
 
-                    <i class="ri-mail-fill text-2xl text-blue-500"></i>
-
-                    <span class="font-semibold">
-                        uday36863@gmail.com
-                    </span>
+                    <i class="ri-mail-fill mr-3"></i>
+                    uday36863@gmail.com
 
                 </a>
 
                 <a
                     href="tel:+919573012093"
-                    class="contact-link flex items-center gap-4"
+                    class="hover:text-blue-400 transition"
                 >
 
-                    <i class="ri-phone-fill text-2xl text-blue-500"></i>
-
-                    <span class="font-semibold">
-                        +91 9573012093
-                    </span>
+                    <i class="ri-phone-fill mr-3"></i>
+                    +91 9573012093
 
                 </a>
 
                 <a
                     href="https://github.com/udaykumar-juvva"
                     target="_blank"
-                    class="contact-link flex items-center gap-4"
+                    class="hover:text-blue-400 transition"
                 >
 
-                    <i class="ri-github-fill text-2xl text-blue-500"></i>
+                    <i class="ri-github-fill mr-3"></i>
+                    github.com/udaykumar-juvva
+                    <!-- PLASMA CTA SECTION -->
+<section class="px-6 md:px-20 py-28">
 
-                    <span class="font-semibold">
-                        github.com/udaykumar-juvva
-                    </span>
+    <div class="max-w-5xl mx-auto">
+
+        <!-- PLASMA CARD -->
+        <div class="plasma-card">
+
+            <h2 class="unbounded text-4xl md:text-6xl font-black mb-6 text-center">
+                Want to work together?
+            </h2>
+
+            <p class="text-zinc-400 text-center text-lg mb-10">
+                Open for internships, freelance projects, and frontend developer roles.
+            </p>
+
+            <div class="flex justify-center">
+
+                <a href="mailto:uday36863@gmail.com?subject=Hiring%20Opportunity"
+                   class="px-10 py-5 rounded-full bg-white text-black font-semibold hover:scale-105 transition">
+                    Hire Me
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
                 </a>
 
@@ -847,34 +1039,51 @@
 
     </footer>
 
-    <!-- GSAP -->
+    <!-- SCRIPT -->
 
     <script>
 
-        // LETTER ANIMATION
+        // MENU
 
-        const heroName = document.getElementById("hero-name");
+        const menuBtn =
+        document.getElementById("menu-btn");
 
-        const text = heroName.textContent.trim();
+        const mobileMenu =
+        document.getElementById("mobile-menu");
+
+        menuBtn.addEventListener("click",()=>{
+
+            mobileMenu.classList.toggle("hidden");
+
+        });
+
+        // TEXT ANIMATION
+
+        const heroName =
+        document.getElementById("hero-name");
+
+        const text =
+        heroName.textContent.trim();
 
         heroName.innerHTML = "";
 
         text.split("").forEach((char)=>{
 
-            const span = document.createElement("span");
+            const span =
+            document.createElement("span");
 
             span.className = "char";
 
             span.innerHTML =
-                char === " "
-                ? "&nbsp;"
-                : char;
+            char === " "
+            ? "&nbsp;"
+            : char;
 
             heroName.appendChild(span);
 
         });
 
-        // LOAD ANIMATION
+        // GSAP
 
         window.addEventListener("load",()=>{
 
@@ -885,10 +1094,10 @@
                 rotateX:0,
                 filter:"blur(0px)",
 
-                duration:1,
-                stagger:0.05,
+                duration:2.0,
+                stagger:0.08,
 
-                ease:"power3.out"
+                ease:"power4.out"
 
             });
 
@@ -897,9 +1106,9 @@
                 opacity:1,
                 y:0,
 
-                duration:0.8,
+                duration:1,
                 stagger:0.15,
-                delay:0.4,
+                delay:0.3,
 
                 ease:"power3.out"
 
@@ -910,9 +1119,9 @@
                 opacity:1,
                 y:0,
 
-                duration:0.8,
-                stagger:0.08,
-                delay:0.8,
+                duration:1,
+                stagger:0.1,
+                delay:0.5,
 
                 ease:"power3.out"
 
@@ -924,10 +1133,10 @@
 
         gsap.to(".orb1",{
 
-            x:60,
-            y:40,
+            x:100,
+            y:80,
 
-            duration:10,
+            duration:12,
             repeat:-1,
             yoyo:true,
 
@@ -937,10 +1146,23 @@
 
         gsap.to(".orb2",{
 
-            x:-60,
-            y:-40,
+            x:-100,
+            y:-80,
 
-            duration:12,
+            duration:14,
+            repeat:-1,
+            yoyo:true,
+
+            ease:"sine.inOut"
+
+        });
+
+        gsap.to(".orb3",{
+
+            x:60,
+            y:-60,
+
+            duration:10,
             repeat:-1,
             yoyo:true,
 
@@ -951,4 +1173,5 @@
     </script>
 
 </body>
-</html>
+
+</html>  
